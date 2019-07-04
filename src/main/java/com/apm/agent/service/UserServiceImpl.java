@@ -2,6 +2,7 @@ package com.apm.agent.service;
 
 import com.apm.agent.repository.UserBean;
 
+@TestAgent
 public class UserServiceImpl implements IUserService{
 
 	@Override
@@ -11,7 +12,7 @@ public class UserServiceImpl implements IUserService{
 
 	@Override
 	public String getAllUser() {
-		// TODO Auto-generated method stub
+		System.out.println("hahah");
 		return null;
 	}
 

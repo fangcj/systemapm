@@ -1,14 +1,11 @@
 package com.apm.agent.collect;
 
-import javassist.CtClass;
-
 import com.apm.agent.model.ServiceStatistics;
 
 public class ServiceCollect implements ICollect {
-	public static ServiceCollect INSTANCE = null;
+	public static ServiceCollect INSTANCE = new ServiceCollect();
 	
 	public ServiceCollect(){
-		INSTANCE = this;
 	}
 	@Override
 	public ServiceStatistics start(String className, String methodName) {
@@ -25,11 +22,4 @@ public class ServiceCollect implements ICollect {
 		serviceStatistics.setEnd(System.currentTimeMillis());
 		System.out.println(serviceStatistics);
 	}
-	@Override
-	public boolean isNeedCollect(CtClass ctClass) {
-		
-		
-		return false;
-	}
-
 }

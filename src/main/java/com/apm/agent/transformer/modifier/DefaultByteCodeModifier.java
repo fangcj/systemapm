@@ -1,6 +1,4 @@
-package com.apm.agent.transformer;
-
-import java.lang.instrument.IllegalClassFormatException;
+package com.apm.agent.transformer.modifier;
 
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -8,10 +6,10 @@ import javassist.Modifier;
 
 import com.apm.agent.common.util.SourceCodeCreator;
 
-public class ServiceTransFormer extends AbastractTransFormer {
+public class DefaultByteCodeModifier implements ByteCodeModifier {
 	private static final String beginSrc;
     private static final String endSrc;
-
+     
     static {
         StringBuilder sbuilder = new StringBuilder();
         sbuilder.append("com.apm.agent.collect.ServiceCollect instance= ");
@@ -23,14 +21,9 @@ public class ServiceTransFormer extends AbastractTransFormer {
         endSrc = sbuilder.toString();
     }
 	@Override
-	byte[] transform(ClassLoader loader, String className)
-			throws IllegalClassFormatException {
-		CtClass ctClass;
+	public byte[] transform(CtClass ctClass){
 		byte[] sourceByteCode=null;
 		try {
-			ctClass = toCtClass(loader,className);
-			
-			
 			if(ctClass.isInterface()){//如果是接口
 				return null;
 			}
@@ -59,5 +52,4 @@ public class ServiceTransFormer extends AbastractTransFormer {
 
 		return sourceByteCode;
 	}
-
 }

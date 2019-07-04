@@ -19,6 +19,7 @@ public class TestJavaassist {
 	public static void main(String[] args) throws NotFoundException, CannotCompileException, IOException, InstantiationException, IllegalAccessException {
 			//testJavassist();
 		IUserService a = new UserServiceImpl();
+		System.out.println("11:"+a);	
 		System.out.println(a.getAllUser());	
 //		testJosnUitl();
 	}
