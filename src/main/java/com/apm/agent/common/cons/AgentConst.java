@@ -1,6 +1,7 @@
 package com.apm.agent.common.cons;
 
 public class AgentConst {
+	// 默认bean的收集规则
 	//收集规则基于接口
 	public final static String MODIFIER_DEFAULT_RULE_INTERFACE="modifier.default.rule.interface";
 	//收集规则基于类名
@@ -9,4 +10,7 @@ public class AgentConst {
 	public final static String MODIFIER_DEFAULT_RULE_ANNOTATION="modifier.default.rule.annotation";
 	//收集规则基于正则表达式
 	public final static String MODIFIER_DEFAULT_RULE_REGEXPRESS="modifier.default.rule.regExpress";
+	
+	//httpRequestServlet的收集规则
+	public final static String MODIFIER_HTTPREQUEST_RULE_INTERFACE="modifier.httprequest.rule.className";
 }

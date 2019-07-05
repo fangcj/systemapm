@@ -9,9 +9,9 @@ import com.apm.agent.ApmContext;
 import com.apm.agent.transformer.modifier.ByteCodeModifier;
 import com.apm.agent.transformer.modifier.rule.IModifierRule;
 
-public class SimpleClassFileTransFormer extends AbstractClassFileTransFormer{
+public class DefaultBeanClassFileTransFormer extends AbstractClassFileTransFormer{
 	
-	public SimpleClassFileTransFormer(ApmContext apmContext) {
+	public DefaultBeanClassFileTransFormer(ApmContext apmContext) {
 		this.apmContext = apmContext;
 	}
 	

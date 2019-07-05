@@ -6,7 +6,7 @@ import javassist.Modifier;
 
 import com.apm.agent.common.util.SourceCodeCreator;
 
-public class DefaultByteCodeModifier implements ByteCodeModifier {
+public class DefaultBeanByteCodeModifier extends AbstractBasicByteCodeModifier implements ByteCodeModifier {
 	private static final String beginSrc;
     private static final String endSrc;
      

@@ -2,8 +2,9 @@ package com.apm.agent;
 
 import java.lang.instrument.Instrumentation;
 
-import com.apm.agent.transformer.SimpleClassFileTransFormer;
+import com.apm.agent.transformer.DefaultBeanClassFileTransFormer;
 import com.apm.agent.transformer.modifier.rule.DefaultAnnotationModifierRule;
+import com.apm.agent.transformer.modifier.rule.DefaultHttpRequestByteCodeModifierRule;
 
 public class AgentContextInitiner {
 	private Instrumentation instrumentation;
@@ -19,9 +20,10 @@ public class AgentContextInitiner {
 	
 	public void init(){
 		loadModifierRule();
-		instrumentation.addTransformer(new SimpleClassFileTransFormer(apmContext));
+		instrumentation.addTransformer(new DefaultBeanClassFileTransFormer(apmContext));
 	}
 	public void loadModifierRule(){
 		apmContext.registerModifierRules(InstancePro.newInstance(DefaultAnnotationModifierRule.class));
+		apmContext.registerModifierRules(InstancePro.newInstance(DefaultHttpRequestByteCodeModifierRule.class));
 	}
 }

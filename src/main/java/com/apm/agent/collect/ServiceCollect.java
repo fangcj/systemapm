@@ -12,6 +12,8 @@ public class ServiceCollect implements ICollect {
 		System.out.println("ServiceCollect start execute:");
 		ServiceStatistics serviceStatistics = new ServiceStatistics();
 		serviceStatistics.setBegin(System.currentTimeMillis());
+		serviceStatistics.setServiceName(className);
+		serviceStatistics.setMethodName(methodName);
 		return serviceStatistics;
 	}
 
