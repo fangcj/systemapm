@@ -24,9 +24,6 @@ public class DefaultBeanByteCodeModifier extends AbstractBasicByteCodeModifier i
 	public byte[] transform(CtClass ctClass){
 		byte[] sourceByteCode=null;
 		try {
-			if(ctClass.isInterface()){//如果是接口
-				return null;
-			}
 			CtMethod[] methods = ctClass.getDeclaredMethods();
 	        for (CtMethod m : methods) {
 	        	// 屏蔽非公共方法

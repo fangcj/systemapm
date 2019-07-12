@@ -9,7 +9,13 @@ public class BaseStatistics implements java.io.Serializable {
     private String hostIp;
     private String hostName;
     private String traceId;
-
+    private String requestUri;
+	private String requestHost;
+	private String requestPramater;
+	private String requestAttributes;
+	private String sessionAttributes;
+	private String requestSessionId;
+	
     public long getRecordTime() {
         return recordTime;
     }

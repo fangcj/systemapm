@@ -9,11 +9,11 @@ import com.apm.agent.transformer.modifier.DefaultBeanByteCodeModifier;
 
 public class DefaultAnnotationModifierRule implements IModifierRule{
 
-	private final static String MODIFIER_DEFAULT_RULE_INTERFACE = (String) AgentPropertiesUtil.getValue(AgentConst.MODIFIER_DEFAULT_RULE_INTERFACE);
+	private final static String MODIFIER_DEFAULT_RULE_ANNOTATION = (String) AgentPropertiesUtil.getValue(AgentConst.MODIFIER_DEFAULT_RULE_ANNOTATION);
 	DefaultBeanByteCodeModifier INSTANCE = new DefaultBeanByteCodeModifier();
 	@Override
 	public ByteCodeModifier chooseModifier(CtClass ctClass) {
-		if(MODIFIER_DEFAULT_RULE_INTERFACE==null ||
+		if(MODIFIER_DEFAULT_RULE_ANNOTATION==null ||
 				ctClass==null){
 			return null;
 		}
@@ -21,7 +21,7 @@ public class DefaultAnnotationModifierRule implements IModifierRule{
 			Object[] annotations = ctClass.getAnnotations();
 			if(annotations!=null){
 				for(Object annotation :annotations){
-					if(annotation.toString().contains(MODIFIER_DEFAULT_RULE_INTERFACE)){
+					if(annotation.toString().contains(MODIFIER_DEFAULT_RULE_ANNOTATION)){
 						return INSTANCE;
 					}
 				}

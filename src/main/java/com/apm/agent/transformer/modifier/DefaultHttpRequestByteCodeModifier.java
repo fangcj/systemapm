@@ -2,8 +2,8 @@ package com.apm.agent.transformer.modifier;
 
 import javassist.CtClass;
 import javassist.CtMethod;
-import javassist.Modifier;
 
+import com.apm.agent.common.cons.AgentConst;
 import com.apm.agent.common.util.SourceCodeCreator;
 
 public class DefaultHttpRequestByteCodeModifier implements ByteCodeModifier {
@@ -12,8 +12,8 @@ public class DefaultHttpRequestByteCodeModifier implements ByteCodeModifier {
      
     static {
         StringBuilder sbuilder = new StringBuilder();
-        sbuilder.append("com.apm.agent.collect.ServiceCollect instance= ");
-        sbuilder.append("com.apm.agent.collect.ServiceCollect.INSTANCE;\r\n");
+        sbuilder.append("com.apm.agent.collect.HttpSerletRequestCollect instance= ");
+        sbuilder.append("com.apm.agent.collect.HttpSerletRequestCollect.INSTANCE;\r\n");
         sbuilder.append("com.apm.agent.model.ServiceStatistics statistic =instance.start(\"%s\",\"%s\");");
         beginSrc = sbuilder.toString();
         sbuilder = new StringBuilder();
@@ -27,23 +27,19 @@ public class DefaultHttpRequestByteCodeModifier implements ByteCodeModifier {
 			if(ctClass.isInterface()){//如果是接口
 				return null;
 			}
-			CtMethod[] methods = ctClass.getDeclaredMethods();
-	        for (CtMethod m : methods) {
-	        	// 屏蔽非公共方法
-	            if (!Modifier.isPublic(m.getModifiers())) {
-	                continue;
-	            }
-	            // 屏蔽静态方法
-	            if (Modifier.isStatic(m.getModifiers())) {
-	                continue;
-	            }
-	            // 屏蔽本地方法
-	            if (Modifier.isNative(m.getModifiers())) {
-	                continue;
-	            }
-	            SourceCodeCreator.SourceCodeBuild build = new SourceCodeCreator.SourceCodeBuild(m.getName(),ctClass);
-	            build.buildBeforeSrc(beginSrc).buildEndSrc(endSrc).buildMethod();
-	        }
+			// 继承了httpServlet的数据
+			if(AgentConst.SERVLET_SUPERCLASS_NAME.equals(ctClass.getSuperclass().getName())){
+				CtMethod doGetMethod = ctClass.getDeclaredMethod("doGet");
+				if(doGetMethod!=null){
+					 SourceCodeCreator.SourceCodeBuild build = new SourceCodeCreator.SourceCodeBuild(doGetMethod.getName(),ctClass);
+			            build.buildBeforeSrc(beginSrc).buildEndSrc(endSrc).buildServletMethod();
+				}
+				CtMethod doPostMethod = ctClass.getDeclaredMethod("doPost");
+				if(doPostMethod!=null){
+					 SourceCodeCreator.SourceCodeBuild build = new SourceCodeCreator.SourceCodeBuild(doPostMethod.getName(),ctClass);
+			            build.buildBeforeSrc(beginSrc).buildEndSrc(endSrc).buildServletMethod();
+				}
+			}
 	        sourceByteCode = ctClass.toBytecode();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

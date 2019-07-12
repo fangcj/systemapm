@@ -11,16 +11,19 @@ import javassist.NotFoundException;
 import com.apm.agent.common.JsonUtil;
 import com.apm.agent.common.util.SourceCodeCreator;
 import com.apm.agent.repository.UserBean;
-import com.apm.agent.service.IUserService;
-import com.apm.agent.service.UserServiceImpl;
+import com.service.IUserService;
+import com.service.TestBean;
+import com.service.UserServiceImpl;
 
 public class TestJavaassist {
 
 	public static void main(String[] args) throws NotFoundException, CannotCompileException, IOException, InstantiationException, IllegalAccessException {
 			//testJavassist();
 		IUserService a = new UserServiceImpl();
-		System.out.println("11:"+a);	
 		System.out.println(a.getAllUser());	
+		TestBean t = new TestBean();
+		System.out.println(t);	
+
 //		testJosnUitl();
 	}
 	private static void testJosnUitl(){

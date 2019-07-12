@@ -32,7 +32,17 @@ public class SourceCodeCreator {
 			"return ($r)result;"+
 			"}";
 			;
-	
+		private final static String REQUEST_SOUCE="{ %s\n"+
+				"try{\n"+
+				" com.apm.agent.common.JsonUtil.toJson($1);\n"+
+						" %s$agent($$); \n"+
+				" }catch(Throwable e){\n"+
+					"%s\n"+
+					"throw e;\n"+ 
+				"}finally{\n"+
+					"%s\n"+
+				"}\n"+
+				"}";
 	public static void updMethod(String beforeSrc,String errSrc,String endSrc,String methodName,CtClass ctClass) throws NotFoundException, CannotCompileException, IOException{
 	   CtMethod ctMethod= ctClass.getDeclaredMethod(methodName);
        CtMethod copyMethod = CtNewMethod.copy(ctMethod, methodName, ctClass,null);
@@ -78,5 +88,22 @@ public class SourceCodeCreator {
 	       ctClass.addMethod(copyMethod);
 	       ctMethod.setBody(String.format(template,beforeSrc, methodName,errSrc,endSrc));
 		}
+		/**
+		 * 针对httpSerlvet的dopost和doget拦截
+		 * @throws NotFoundException
+		 * @throws CannotCompileException
+		 * @throws IOException
+		 */
+		public void buildServletMethod() throws NotFoundException, CannotCompileException, IOException{
+			   CtMethod ctMethod= ctClass.getDeclaredMethod(methodName);
+		       CtMethod copyMethod = CtNewMethod.copy(ctMethod, methodName, ctClass,null);
+		       copyMethod.setName(methodName+"$agent");
+		       String template = REQUEST_SOUCE;
+		       beforeSrc = beforeSrc==null?"":beforeSrc;
+		       errSrc = errSrc==null?"":errSrc;
+		       endSrc = endSrc==null?"":endSrc;
+		       ctClass.addMethod(copyMethod);
+		       ctMethod.setBody(String.format(template,beforeSrc, methodName,errSrc,endSrc));
+			}
 	}
 }

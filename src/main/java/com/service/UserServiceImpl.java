@@ -1,4 +1,4 @@
-package com.apm.agent.service;
+package com.service;
 
 import com.apm.agent.repository.UserBean;
 
@@ -11,7 +11,7 @@ public class UserServiceImpl implements IUserService{
 	}
 
 	@Override
-	public String getAllUser() {
+	public String getAllUser() throws RuntimeException{
 		System.out.println("hahah");
 		return null;
 	}

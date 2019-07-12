@@ -1,6 +1,8 @@
 package com.apm.agent.collect;
 
-public class AbstractCollect {
 
+public class AbstractCollect{
+
+	protected String requestParams;
 	
 }

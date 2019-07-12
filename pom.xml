@@ -51,10 +51,16 @@
 						<manifestEntries>
 							<Project-name>${project.name}</Project-name>
 							<Project-version>${project.version}</Project-version>
-							<Boot-Class-Path>javassist-3.18.1-GA.jar</Boot-Class-Path>
+							<Boot-Class-Path>E:/devEnvir/jar/agent/javassist-3.18.1-GA.jar</Boot-Class-Path>
 							<Premain-Class>com.apm.agent.AgentBootStrap</Premain-Class>
 						</manifestEntries>
 					</archive>
+					<resources>
+                        <resource>
+                            <directory>src/main/resources</directory>
+                            <filtering>true</filtering>
+                        </resource>
+                    </resources>
 					<skip>true</skip>
 				</configuration>
 			</plugin>

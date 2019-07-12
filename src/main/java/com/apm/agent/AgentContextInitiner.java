@@ -2,7 +2,8 @@ package com.apm.agent;
 
 import java.lang.instrument.Instrumentation;
 
-import com.apm.agent.transformer.DefaultBeanClassFileTransFormer;
+import com.apm.agent.filter.DefaultApmFilter;
+import com.apm.agent.transformer.DefaultClassFileTransFormer;
 import com.apm.agent.transformer.modifier.rule.DefaultAnnotationModifierRule;
 import com.apm.agent.transformer.modifier.rule.DefaultHttpRequestByteCodeModifierRule;
 
@@ -19,11 +20,15 @@ public class AgentContextInitiner {
 	}
 	
 	public void init(){
+		loadApmFilters();// 过滤器
 		loadModifierRule();
-		instrumentation.addTransformer(new DefaultBeanClassFileTransFormer(apmContext));
+		instrumentation.addTransformer(new DefaultClassFileTransFormer(apmContext));
 	}
 	public void loadModifierRule(){
 		apmContext.registerModifierRules(InstancePro.newInstance(DefaultAnnotationModifierRule.class));
 		apmContext.registerModifierRules(InstancePro.newInstance(DefaultHttpRequestByteCodeModifierRule.class));
+	}
+	public void loadApmFilters(){
+		apmContext.registerApmFilters(InstancePro.newInstance(DefaultApmFilter.class));
 	}
 }

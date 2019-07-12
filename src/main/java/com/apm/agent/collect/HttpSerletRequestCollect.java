@@ -2,25 +2,23 @@ package com.apm.agent.collect;
 
 import com.apm.agent.model.ServiceStatistics;
 
-public class ServiceCollect extends AbstractCollect implements ICollect {
-	public static ServiceCollect INSTANCE = new ServiceCollect();
+public class HttpSerletRequestCollect extends AbstractCollect implements ICollect {
+	public static HttpSerletRequestCollect INSTANCE = new HttpSerletRequestCollect();
 	
-	public ServiceCollect(){
+	public HttpSerletRequestCollect(){
 	}
 	@Override
 	public ServiceStatistics start(String className, String methodName) {
-		System.out.println("ServiceCollect start execute:");
+		System.out.println("HttpSerletRequest start execute:");
 		ServiceStatistics serviceStatistics = new ServiceStatistics();
 		serviceStatistics.setBegin(System.currentTimeMillis());
-		serviceStatistics.setServiceName(className);
-		serviceStatistics.setMethodName(methodName);
 		return serviceStatistics;
 	}
 
 	@Override
 	public void end(ServiceStatistics serviceStatistics) {
-		System.out.println("ServiceCollect end execute:");
-		System.out.println("serviceStatistics setBegin execute:"+serviceStatistics.getBegin());
+		System.out.println("HttpSerletRequest end execute:");
+		System.out.println("HttpSerletRequest execute:"+serviceStatistics.getBegin());
 		serviceStatistics.setEnd(System.currentTimeMillis());
 		System.out.println(serviceStatistics);
 	}
