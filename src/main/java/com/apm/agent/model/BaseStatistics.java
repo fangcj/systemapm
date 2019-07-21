@@ -1,5 +1,7 @@
 package com.apm.agent.model;
 
+import java.util.Map;
+
 /**
  * Created by Tommy on 2018/3/8.
  */
@@ -11,11 +13,10 @@ public class BaseStatistics implements java.io.Serializable {
     private String traceId;
     private String requestUri;
 	private String requestHost;
-	private String requestPramater;
-	private String requestAttributes;
 	private String sessionAttributes;
 	private String requestSessionId;
-	
+    private Map<String,String[]> requestParameters;
+
     public long getRecordTime() {
         return recordTime;
     }
@@ -54,5 +55,45 @@ public class BaseStatistics implements java.io.Serializable {
 
     public void setTraceId(String traceId) {
         this.traceId = traceId;
+    }
+
+    public String getRequestUri() {
+        return requestUri;
+    }
+
+    public void setRequestUri(String requestUri) {
+        this.requestUri = requestUri;
+    }
+
+    public String getRequestHost() {
+        return requestHost;
+    }
+
+    public void setRequestHost(String requestHost) {
+        this.requestHost = requestHost;
+    }
+
+    public String getSessionAttributes() {
+        return sessionAttributes;
+    }
+
+    public void setSessionAttributes(String sessionAttributes) {
+        this.sessionAttributes = sessionAttributes;
+    }
+
+    public String getRequestSessionId() {
+        return requestSessionId;
+    }
+
+    public void setRequestSessionId(String requestSessionId) {
+        this.requestSessionId = requestSessionId;
+    }
+
+    public Map<String, String[]> getRequestParameters() {
+        return requestParameters;
+    }
+
+    public void setRequestParameters(Map<String, String[]> requestParameters) {
+        this.requestParameters = requestParameters;
     }
 }

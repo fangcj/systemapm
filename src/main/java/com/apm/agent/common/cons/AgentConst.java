@@ -22,6 +22,7 @@ public class AgentConst {
 	public final static String SERVLET_INTERCEPTOR_GET="doGet";
 	//httpRequestServlet的收集规则
 	public final static String SERVLET_INTERCEPTOR_POST="doPost";
-		
+	//获取requestparameters的方法
+	public final static String REQUEST_METHOD_GETPARAMETERMAP="getParameterMap";
 
 }
